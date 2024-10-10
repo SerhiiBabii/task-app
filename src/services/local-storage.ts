@@ -1,4 +1,5 @@
 import { STORAGE_KEY } from '../constants/local-storage';
+import { TaskFilter } from '../models/filter';
 import { Task } from '../models/task';
 
 export function getTasks() {
@@ -57,6 +58,26 @@ export function deleteTask(id: string) {
   const nextState = {
     ...prevState,
     tasks: prevState.tasks.filter((task: Task) => task.id !== id),
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
+}
+
+export function getFilter() {
+  const storageData = localStorage.getItem(STORAGE_KEY);
+  const prevState = storageData ? JSON.parse(storageData) : {};
+  const { filter } = prevState;
+
+  return filter ?? null;
+}
+
+export function saveFilter(filterData: TaskFilter) {
+  const storageData = localStorage.getItem(STORAGE_KEY);
+  const prevState = storageData ? JSON.parse(storageData) : {};
+
+  const nextState = {
+    ...prevState,
+    filter: filterData,
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));

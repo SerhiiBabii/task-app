@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { useTask } from './context/task-context';
 import TaskList from './components/task-list/task-list';
-import './App.css';
+import TaskFilter from './components/task-filter/task-filter';
+import { FILTER_VALUES, STORAGE_KEY } from './constants';
 
 function App() {
-  const { tasks } = useTask();
+  const { tasks, changeFilter } = useTask();
+
+  useEffect(() => {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      changeFilter(FILTER_VALUES.all);
+    }
+  }, []);
 
   return (
     <div className="p-4">
@@ -14,6 +22,7 @@ function App() {
       >
         New task
       </button>
+      <TaskFilter />
       {tasks.length ? <TaskList tasks={tasks} /> : <p>No Data</p>}
     </div>
   );
