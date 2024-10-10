@@ -1,6 +1,6 @@
 # Task App
 
-This small project provide you following opportunity:
+This small project provides you following opportunities:
 
 - Adding a task;
 - Deleting a task;
