@@ -4,20 +4,13 @@ import { useTask } from '../../context/task-context';
 import { Task } from '../../models/task';
 
 function TaskItem(taskData: Task) {
-  const { id, title, description, isCompleted } = taskData;
+  const { id, description, isCompleted } = taskData;
   const { handleToggleComplete } = useTask();
   const { handleOpenModal } = useModal();
 
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-4 flex justify-between max-sm:flex-col items-center animate-fadeIn">
       <div className="flex-1">
-        <h3
-          className={`text-lg font-semibold ${
-            isCompleted ? 'line-through text-gray-500' : ''
-          }`}
-        >
-          {title}
-        </h3>
         <p
           className={`text-sm break-all ${
             isCompleted ? 'line-through text-gray-400' : 'text-gray-700'

@@ -29,10 +29,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
             X
           </button>
         </div>
-        <p className="mb-4">
-          Are you sure you want to delete the task{' '}
-          <strong>{taskData.title}</strong>?
-        </p>
+        <p className="mb-4">Are you sure you want to delete the task?</p>
         <p>This action cannot be undone.</p>
         <div className="flex justify-end">
           <button
