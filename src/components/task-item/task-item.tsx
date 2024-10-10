@@ -1,10 +1,9 @@
+import { useTask } from '../../context/task-context';
 import { Task } from '../../models/task';
 
 function TaskItem(taskData: Task) {
   const { id, title, description, isCompleted } = taskData;
-  const toggleCompleteHandler = (id: string) => {
-    console.log(id);
-  };
+  const { toggleComplete, deleteTask } = useTask();
   const openModalHandler = () => {};
 
   return (
@@ -30,7 +29,7 @@ function TaskItem(taskData: Task) {
           className={`px-4 py-2 rounded-md ${
             isCompleted ? 'bg-yellow-500 text-white' : 'bg-green-500 text-white'
           } hover:bg-opacity-80`}
-          onClick={() => toggleCompleteHandler(id)}
+          onClick={() => toggleComplete(id)}
         >
           {isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
         </button>
@@ -45,7 +44,7 @@ function TaskItem(taskData: Task) {
         </button>
         <button
           className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-          onClick={() => openModalHandler()}
+          onClick={() => deleteTask(id)}
         >
           Delete
         </button>
