@@ -1,1 +1,3 @@
-export * from './task-item.tsx';
+import TaskItem from './task-item';
+
+export default TaskItem;

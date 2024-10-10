@@ -6,9 +6,9 @@ import {
   getTasks,
   saveFilter,
   saveTask,
-  deleteTask as deleteTaskItem,
-  editTask as editTaskItem,
-  changeTaskCompletion,
+  deleteTask,
+  editTask,
+  toggleComplete,
 } from '../services';
 import { FILTER_VALUES } from '../constants/filter';
 
@@ -16,10 +16,10 @@ interface TaskContextProps {
   tasks: TaskList;
   filter: string;
   createTask: (task: Task) => void;
-  editTask: (task: Task) => void;
-  deleteTask: (id: string) => void;
-  changeFilter: (filter: TaskFilter) => void;
-  toggleComplete: (id: string) => void;
+  handleEditTask: (task: Task) => void;
+  handleDeleteTask: (id: string) => void;
+  handleChangeFilter: (filter: TaskFilter) => void;
+  handleToggleComplete: (id: string) => void;
 }
 
 interface TaskProviderProps {
@@ -30,10 +30,10 @@ const TaskContext = createContext<TaskContextProps>({
   tasks: [] as TaskList,
   filter: 'all',
   createTask: (_task: Task) => {},
-  editTask: (_task: Task) => {},
-  deleteTask: (_id: string) => {},
-  changeFilter: (_filter: TaskFilter) => {},
-  toggleComplete: (_id: string) => {},
+  handleEditTask: (_task: Task) => {},
+  handleDeleteTask: (_id: string) => {},
+  handleChangeFilter: (_filter: TaskFilter) => {},
+  handleToggleComplete: (_id: string) => {},
 });
 
 function filterTasks(tasks: TaskList, filter: TaskFilter | null) {
@@ -64,7 +64,7 @@ export const TaskProvider: FC<TaskProviderProps> = ({ children }) => {
     saveTask(task);
   }
 
-  function editTask(task: Task) {
+  function handleEditTask(task: Task) {
     setTasks((prevState) => {
       const newState = [...prevState];
       const taskIndex = newState.findIndex((item) => item.id === task.id);
@@ -73,20 +73,20 @@ export const TaskProvider: FC<TaskProviderProps> = ({ children }) => {
 
       return newState;
     });
-    editTaskItem(task);
+    editTask(task);
   }
 
-  function deleteTask(id: string) {
+  function handleDeleteTask(id: string) {
     setTasks(tasks.filter((task) => task.id !== id));
-    deleteTaskItem(id);
+    deleteTask(id);
   }
 
-  function toggleComplete(id: string) {
-    changeTaskCompletion(id);
+  function handleToggleComplete(id: string) {
+    toggleComplete(id);
     setTasks(getFilteredTasks());
   }
 
-  function changeFilter(filter: TaskFilter) {
+  function handleChangeFilter(filter: TaskFilter) {
     setFilter(filter);
     setTasks(filterTasks(getTasks(), filter));
     saveFilter(filter);
@@ -96,10 +96,10 @@ export const TaskProvider: FC<TaskProviderProps> = ({ children }) => {
     tasks,
     filter,
     createTask,
-    editTask,
-    deleteTask,
-    changeFilter,
-    toggleComplete,
+    handleEditTask,
+    handleDeleteTask,
+    handleChangeFilter,
+    handleToggleComplete,
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;

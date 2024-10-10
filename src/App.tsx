@@ -1,15 +1,20 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useTask } from './context/task-context';
-import TaskList from './components/task-list/task-list';
-import TaskFilter from './components/task-filter/task-filter';
-import { FILTER_VALUES, STORAGE_KEY } from './constants';
+import { useModal } from './context/modal-context';
+import TaskFilter from './components/task-filter';
+import TaskModals from './components/modals/task-modals';
+import { FILTER_VALUES, MODAL_TYPES, STORAGE_KEY } from './constants';
+
+const TaskList = lazy(() => import('./components/task-list'));
 
 function App() {
-  const { tasks, changeFilter } = useTask();
+  const { tasks, handleChangeFilter } = useTask();
+  const { isOpen, modalType, modalData, handleOpenModal, handleCloseModal } =
+    useModal();
 
   useEffect(() => {
     if (!localStorage.getItem(STORAGE_KEY)) {
-      changeFilter(FILTER_VALUES.all);
+      handleChangeFilter(FILTER_VALUES.all);
     }
   }, []);
 
@@ -18,12 +23,25 @@ function App() {
       <h1 className="text-2xl mb-4">Task App</h1>
       <button
         className="w-72 bg-cyan-500 text-white px-4 py-2 mb-4 rounded hover:bg-cyan-600"
-        onClick={() => {}}
+        onClick={() => handleOpenModal(MODAL_TYPES.ADD)}
       >
         New task
       </button>
       <TaskFilter />
-      {tasks.length ? <TaskList tasks={tasks} /> : <p>No Data</p>}
+      {tasks.length ? (
+        <Suspense fallback={<p>Loading...</p>}>
+          <TaskList tasks={tasks} />
+        </Suspense>
+      ) : (
+        <p>No Data</p>
+      )}
+      {isOpen && modalType && (
+        <TaskModals
+          modalType={modalType!}
+          modalData={modalData}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

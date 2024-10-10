@@ -3,12 +3,12 @@ import { useTask } from '../../context/task-context';
 import { TaskFilter as TaskFilterValue } from '../../models/filter';
 
 function TaskFilter() {
-  const { filter, changeFilter } = useTask();
+  const { filter, handleChangeFilter } = useTask();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
 
-    changeFilter(name as TaskFilterValue);
+    handleChangeFilter(name as TaskFilterValue);
   };
 
   return (

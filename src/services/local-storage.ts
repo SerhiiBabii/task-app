@@ -38,7 +38,7 @@ export function editTask(taskData: Task) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
 }
 
-export function changeTaskCompletion(id: string) {
+export function toggleComplete(id: string) {
   const prevState = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
   const tasks =
     prevState?.tasks?.map((task: Task) =>

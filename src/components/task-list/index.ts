@@ -1,1 +1,3 @@
-export * from './task-list.tsx';
+import TaskList from './task-list';
+
+export default TaskList;
