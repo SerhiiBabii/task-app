@@ -12,4 +12,4 @@ The implementation allows for saving tasks and a filter state between reloads. D
 
 The `feature/title-task` has possibility to add a title to the task.
 
-To launch project locally run the `npm run dev` command in the terminal.
+To launch the project locally you need to run the `npm i` and then the `npm run dev` command in the terminal.
