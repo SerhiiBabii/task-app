@@ -13,3 +13,5 @@ The implementation allows for saving tasks and a filter state between reloads. D
 The `feature/title-task` has possibility to add a title to the task.
 
 To launch the project locally you need to run the `npm i` and then the `npm run dev` command in the terminal.
+
+#### Development of this project took approximately 6-7 hours.
