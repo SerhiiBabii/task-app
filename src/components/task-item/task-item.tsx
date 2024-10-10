@@ -9,7 +9,7 @@ function TaskItem(taskData: Task) {
   const { handleOpenModal } = useModal();
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 mb-4 flex justify-between items-center animate-fadeIn">
+    <div className="bg-white shadow-md rounded-lg p-4 mb-4 flex justify-between max-sm:flex-col items-center animate-fadeIn">
       <div className="flex-1">
         <h3
           className={`text-lg font-semibold ${
@@ -19,14 +19,14 @@ function TaskItem(taskData: Task) {
           {title}
         </h3>
         <p
-          className={`text-sm ${
+          className={`text-sm break-all ${
             isCompleted ? 'line-through text-gray-400' : 'text-gray-700'
           }`}
         >
           {description}
         </p>
       </div>
-      <div className="flex space-x-2 max-sm:flex-col max-sm:*:mb-2">
+      <div className="flex space-x-2 max-sm:mt-4 max-sm:*:mb-2">
         <button
           className={`px-4 py-2 rounded-md ${
             isCompleted ? 'bg-yellow-500 text-white' : 'bg-green-500 text-white'

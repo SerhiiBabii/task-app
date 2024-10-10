@@ -7,7 +7,7 @@ type TaskListProps = {
 
 function TaskList({ tasks }: TaskListProps) {
   return (
-    <section>
+    <section className="min-w-72">
       {tasks.map((task) => (
         <article key={task.id}>
           <TaskItem {...task} />
