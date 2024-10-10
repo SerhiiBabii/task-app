@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from '../constants/local-storage';
+import { STORAGE_KEY } from '../constants';
 import { TaskFilter } from '../models/filter';
 import { Task } from '../models/task';
 

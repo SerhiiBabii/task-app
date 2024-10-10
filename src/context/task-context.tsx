@@ -38,11 +38,11 @@ const TaskContext = createContext<TaskContextProps>({
 
 function filterTasks(tasks: TaskList, filter: TaskFilter | null) {
   switch (filter) {
-    case FILTER_VALUES.all:
+    case FILTER_VALUES.ALL:
       return tasks;
-    case FILTER_VALUES.active:
+    case FILTER_VALUES.ACTIVE:
       return tasks.filter((task: Task) => !task.isCompleted);
-    case FILTER_VALUES.completed:
+    case FILTER_VALUES.COMPLETED:
       return tasks.filter((task: Task) => task.isCompleted);
     default:
       return tasks;

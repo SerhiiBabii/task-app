@@ -1,3 +1,3 @@
-import { FILTER_VALUES } from '../constants/filter';
+import { FILTER_VALUES } from '../constants';
 
-export type TaskFilter = keyof typeof FILTER_VALUES;
+export type TaskFilter = (typeof FILTER_VALUES)[keyof typeof FILTER_VALUES];

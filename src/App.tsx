@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     if (!localStorage.getItem(STORAGE_KEY)) {
-      handleChangeFilter(FILTER_VALUES.all);
+      handleChangeFilter(FILTER_VALUES.ALL);
     }
   }, []);
 
